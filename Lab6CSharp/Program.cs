@@ -1,58 +1,94 @@
 ﻿// See https://aka.ms/new-console-template for more information
-/// <summary>
-///  Top-level statements 
-///  Код програми (оператори)  вищого рівня
-/// </summary>
-///
-Console.WriteLine("Lab6 C# ");
-AnyFunc();
+using System.Diagnostics;
 
-/// <summary>
-/// 
-///  Top-level statements must precede namespace and type declarations.
-/// At the top-level methods/functions can be defined and used
-/// На верхньому рівні можна визначати та використовувати методи/функції
-/// </summary>
-void AnyFunc()
+class Program
 {
-    Console.WriteLine(" Some function in top-level");
-}
-Console.WriteLine("Problems 1 ");
-AnyFunc();
-//  приклад класів
-UserClass cl = new UserClass();
-cl.Name = " UserClass top-level ";
-User.UserClass cl2 = new();
-cl2.Name = " UserClass namespace User ";
-
-
-
-
-/// <summary>
-/// 
-/// Top-level statements must precede namespace and type declarations.
-/// Оператори верхнього рівня мають передувати оголошенням простору імен і типу.
-/// Створення класу(ів) або оголошенням простору імен є закіченням  іструкцій верхнього рівня
-/// 
-/// </summary>
-
-namespace User
-{
-    class UserClass
+    static void Main(string[] args)
     {
-        public string Name { get; set; }
-        public UserClass()
+        bool continueRunning = true;
+
+        while (continueRunning)
         {
-            Name = "NoName";
+            Console.WriteLine("1. Iєрархя класiв ");
+            Console.WriteLine("2. Trans");
+            Console.WriteLine("3. Стандартнi iнтерфейси .NET");
+
+            char choice = Console.ReadKey().KeyChar;
+            Console.WriteLine();
+
+            switch (choice)
+            {
+                case '1':
+                    task1();
+                    break;
+                case '2':
+                    task2();
+                    break;
+                case '3':
+                    task3();
+                    break;
+                default:
+                    Console.WriteLine("Неправильний вибiр.");
+                    break;
+            }
+
+            Console.WriteLine("Бажаєте продовжити? (Y/N)");
+            char continueChoice = Console.ReadKey().KeyChar;
+            Console.WriteLine();
+
+            continueRunning = (continueChoice == 'Y' || continueChoice == 'y');
         }
-        UserClass(string n)
-        {
-            Name = n;
-        }
+
+        Console.WriteLine("Натиснiть будь-яку клавiшу, щоб вийти...");
+        Console.ReadKey();
     }
 
-}
-class UserClass
-{
-    public string Name { get; set; }
+    static void task1()
+    {
+        // Приклад використання
+        Ungulate horse = new Ungulate
+        {
+            Name = "Horse",
+            FurColor = "Brown",
+            Hooves = true
+        };
+        horse.Show();
+        horse.Display();
+
+        Bird eagle = new Bird
+        {
+            Name = "Eagle",
+            FeatherColor = "Brown"
+        };
+        eagle.Show();
+        eagle.Display();
+        eagle.DotNetFunctionality();
+
+    }
+
+    static void task2()
+    {
+        // Приклад використання
+        MyDerivedClass obj = new MyDerivedClass();
+        obj.CustomFunctionality();
+        obj.Dispose();
+        obj.Clone();
+    }
+
+    static void task3()
+    {
+        // Створення бази транспортних засобiв
+        Truck[] trucks = new Truck[]
+        {
+            new Truck("Volvo", "IJ91011KL", 80, 2000, false),
+            new Truck("MAN", "MN121314OP", 70, 3000, true)
+        };
+
+        // Використання оператора foreach для перебору вантажiвок
+        Console.WriteLine("All trucks:");
+        foreach (var truck in trucks)
+        {
+            truck.DisplayInfo();
+        }
+    }
 }
